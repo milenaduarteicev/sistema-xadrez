@@ -1,3 +1,8 @@
+
+# Milena Duarte
+# Max Ramon
+# Marcos Vinnicius
+
 import chess
 import random
 import chess.polyglot
@@ -63,7 +68,7 @@ def minimax(profundidade, board, maximizando):
   if(profundidade == 0):
       return -evaluation(board)
   possibleMoves = melhoresJogadas(board)
-  
+
   if(maximizando):
       bestMove = -9999
       for x in possibleMoves:
