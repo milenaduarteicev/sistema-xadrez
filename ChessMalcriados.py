@@ -1,31 +1,28 @@
 import chess
 import random
 import chess.polyglot
-from google.colab import drive
 
-drive.mount("/content/drive")
+caminho_bookfish = "arquivo_necessario/bookfish.bin"
 
-#criando tabuleiro
 board = chess.Board()
-board
 
 def obterMelhorJogada(board=board):
-  jogadas = melhoresJogadas(board)
-  melhorJogada = None
-  if len(jogadas)>0:
-    melhorJogada = jogadas[0].move
-  if not melhorJogada:
-    print("Não achou jogada")
-    melhorJogada = random.sample(list(board.legal_moves), 1)[0]
-  return melhorJogada
+    jogadas = melhoresJogadas(board)
+    melhorJogada = None
+    if len(jogadas)>0:
+        melhorJogada = jogadas[0].move
+    if not melhorJogada:
+        print("Não achou jogada")
+        melhorJogada = random.sample(list(board.legal_moves), 1)[0]
+    return melhorJogada
 
 
 def melhoresJogadas(board=board):
-  jogadas = []
-  with chess.polyglot.open_reader("/content/drive/MyDrive/Xadrez/bookfish.bin") as reader:
-    for entry in reader.find_all(board):
-      jogadas.append(entry)
-  return jogadas
+    jogadas = []
+    with chess.polyglot.open_reader(caminho_bookfish) as reader:
+        for entry in reader.find_all(board):
+            jogadas.append(entry)
+    return jogadas
 
 
 print("Melhor jogada agora: ", obterMelhorJogada())
@@ -66,7 +63,7 @@ def minimax(profundidade, board, maximizando):
   if(profundidade == 0):
       return -evaluation(board)
   possibleMoves = melhoresJogadas(board)
-  #print(f"Quantidade de jogadas (profundidade: {profundidade}):", len(possibleMoves))
+  
   if(maximizando):
       bestMove = -9999
       for x in possibleMoves:
@@ -106,8 +103,6 @@ def minimaxRoot(board, depth, isMaximizing):
           bestMoveFinal = move
     return bestMoveFinal
 
-
-
 def receberJogada(board=board):
   while True:
       try:
@@ -120,22 +115,11 @@ def receberJogada(board=board):
       except ValueError:
         print("Entrada inválida! Tente novamente.")
 
-def escolherLado():
-    while True:
-        lado = input("Você quer ser as brancas ou as pretas? (b/p): ")
-        if lado.lower() == 'b':
-            return True
-        elif lado.lower() == 'p':
-            return False
-        else:
-            print("Escolha inválida! Tente novamente.")
-
 i = -1
 print("########### PARTIDA COMEÇOU ###########")
 # Loop principal do jogo
 quem_comeca = input("Quem começa jogando? (o/ia): ").lower()
 jogador_branco = quem_comeca == 'o'
-print()
 
 while True:
     print()
@@ -157,5 +141,3 @@ while True:
         break
     else:
       continue
-
-    
