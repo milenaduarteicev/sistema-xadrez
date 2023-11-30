@@ -1,7 +1,10 @@
+<<<<<<< HEAD
 # Milena Duarte
 # Max Ramon
 # Marcos Vinnicius
 
+=======
+>>>>>>> 33b12fef3b9522b5cd49f8004491e73db81be1a5
 import chess
 import random
 import chess.polyglot
@@ -9,6 +12,10 @@ from google.colab import drive
 
 drive.mount("/content/drive")
 
+<<<<<<< HEAD
+=======
+#criando tabuleiro
+>>>>>>> 33b12fef3b9522b5cd49f8004491e73db81be1a5
 board = chess.Board()
 board
 
@@ -69,6 +76,10 @@ def minimax(profundidade, board, maximizando):
   if(profundidade == 0):
       return -evaluation(board)
   possibleMoves = melhoresJogadas(board)
+<<<<<<< HEAD
+=======
+  #print(f"Quantidade de jogadas (profundidade: {profundidade}):", len(possibleMoves))
+>>>>>>> 33b12fef3b9522b5cd49f8004491e73db81be1a5
   if(maximizando):
       bestMove = -9999
       for x in possibleMoves:
